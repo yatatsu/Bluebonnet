@@ -113,6 +113,9 @@ public class Bluebonnet {
                         }
                         reject(self.UnexpectedError ?? NSError())
                 })
+            configure.pause = { req.suspend() }
+            configure.resume = { req.resume() }
+            configure.cancel = { req.cancel() }
         }
         return task
     }
