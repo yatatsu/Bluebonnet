@@ -1,0 +1,6 @@
+framework module Bluebonnet {
+  umbrella header "Pods-Bluebonnet_Tests-Bluebonnet-umbrella.h"
+
+  export *
+  module * { export * }
+}

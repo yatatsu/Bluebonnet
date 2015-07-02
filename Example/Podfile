@@ -3,6 +3,7 @@ use_frameworks!
 
 target 'Bluebonnet_Example', :exclusive => true do
   pod "Bluebonnet", :path => "../"
+  pod "SwiftyJSON", '2.2.0'
 end
 
 target 'Bluebonnet_Tests', :exclusive => true do

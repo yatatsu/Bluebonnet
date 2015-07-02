@@ -22,7 +22,7 @@ pod "Bluebonnet"
 
 ## Author
 
-kitagawa, kitagawa@appirits.com
+KITAGAWA Tatsuya, yatatsukitagawa@gmail.com
 
 ## License
 

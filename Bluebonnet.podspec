@@ -1,38 +1,28 @@
-#
-# Be sure to run `pod lib lint Bluebonnet.podspec' to ensure this is a
-# valid spec and remove all comments before submitting the spec.
-#
-# Any lines starting with a # are optional, but encouraged
-#
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
+# coding: utf-8
 Pod::Spec.new do |s|
-  s.name             = "Bluebonnet"
-  s.version          = "0.1.0"
-  s.summary          = "A short description of Bluebonnet."
-  s.description      = <<-DESC
-                       An optional longer description of Bluebonnet
 
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
-                       DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/Bluebonnet"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
-  s.license          = 'MIT'
-  s.author           = { "kitagawa" => "kitagawa@appirits.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/Bluebonnet.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+s.name         = "Bluebonnet"
+s.version      = "0.1.0"
+s.summary      = "A type safe API cliet with Alamofire + SwiftTask."
 
-  s.platform     = :ios, '8.0'
-  s.requires_arc = true
+s.description  = <<-DESC
+Bluebonnet is a wrapper of Alamofire and SwiftTask for web API client.
+It provides simple interface based on SwiftTask  with typed value response.
+DESC
 
-  s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'Bluebonnet' => ['Pod/Assets/*.png']
-  }
+s.homepage     = "https://github.com/yatatsu/Bluebonnet"
+s.license      = { :type => "MIT", :file => "LICENSE" }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+s.author             = { "yatatsu" => "yatatsukitagawa@gmail.com" }
+s.social_media_url   = "http://twitter.com/tatsuyakit"
+s.platform     = :ios, "8.0"
+
+s.source       = { :git => "https://github.com/yatatsu/Bluebonnet.git", :tag => s.version }
+s.source_files = 'Source/*.swift'
+
+s.requires_arc = true
+
+s.dependency "Alamofire", "~> 1.2.0"
+s.dependency "SwiftTask", "~> 3.3.0"
+
 end

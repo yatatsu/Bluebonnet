@@ -1,0 +1,6 @@
+framework module Pods_Bluebonnet_Example {
+  umbrella header "Pods-Bluebonnet_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
