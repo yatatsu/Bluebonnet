@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "13D8C63069944C32BE5B60B6"
+               BlueprintIdentifier = "1F4A88C166C01E6DCB2A2CA4"
                BuildableName = "Bluebonnet.framework"
                BlueprintName = "Pods-Bluebonnet_Example-Bluebonnet"
                ReferencedContainer = "container:Pods.xcodeproj">

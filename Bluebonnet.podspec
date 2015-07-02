@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
 
 s.name         = "Bluebonnet"
 s.version      = "0.1.0"
-s.summary      = "A type safe API cliet with Alamofire + SwiftTask."
+s.summary      = "A simple and type safe API client using Alamofire + SwiftTask."
 
 s.description  = <<-DESC
 Bluebonnet is a wrapper of Alamofire and SwiftTask for web API client.
@@ -18,7 +18,7 @@ s.social_media_url   = "http://twitter.com/tatsuyakit"
 s.platform     = :ios, "8.0"
 
 s.source       = { :git => "https://github.com/yatatsu/Bluebonnet.git", :tag => s.version }
-s.source_files = 'Source/*.swift'
+s.source_files = 'Bluebonnet/*.swift'
 
 s.requires_arc = true
 
