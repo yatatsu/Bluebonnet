@@ -1,6 +1,6 @@
 # Bluebonnet
 
-[![CI Status](http://img.shields.io/travis/kitagawa/Bluebonnet.svg?style=flat)](https://travis-ci.org/kitagawa/Bluebonnet)
+[![Circle CI](https://circleci.com/gh/yatatsu/Bluebonnet.svg?style=svg)](https://circleci.com/gh/yatatsu/Bluebonnet)
 [![Version](https://img.shields.io/cocoapods/v/Bluebonnet.svg?style=flat)](http://cocoapods.org/pods/Bluebonnet)
 [![License](https://img.shields.io/cocoapods/l/Bluebonnet.svg?style=flat)](http://cocoapods.org/pods/Bluebonnet)
 [![Platform](https://img.shields.io/cocoapods/p/Bluebonnet.svg?style=flat)](http://cocoapods.org/pods/Bluebonnet)
