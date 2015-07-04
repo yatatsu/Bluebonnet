@@ -128,7 +128,7 @@ class BluebonnetTests: XCTestCase {
             expectation.fulfill()
             }
         .failure { (error, isCancelled) -> Void in
-            XCTAssert(error?.domain == GitHubAPI.UnexpectedError?.domain)
+            XCTAssert(error?.domain == GitHubAPI.unexpectedError?.domain)
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(1.0, handler: nil)

@@ -12,7 +12,7 @@ import Bluebonnet
 class GitHubAPI: Bluebonnet {
     static let baseURL: NSURL = NSURL(string: "https://api.github.com")!
 
-    override class var UnexpectedError: NSError? {
+    override class var unexpectedError: NSError? {
         return NSError(domain: "com.github.error", code: 0, userInfo: nil);
     }
     
