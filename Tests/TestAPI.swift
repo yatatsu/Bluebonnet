@@ -11,6 +11,10 @@ import Bluebonnet
 
 class GitHubAPI: Bluebonnet {
     static let baseURL: NSURL = NSURL(string: "https://api.github.com")!
+
+    override class var UnexpectedError: NSError? {
+        return NSError(domain: "com.github.error", code: 0, userInfo: nil);
+    }
     
     struct GetMock: BluebonnetRequest  {
         typealias Response = MockResponse

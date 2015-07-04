@@ -63,7 +63,11 @@ public class Bluebonnet {
         case CONNECT = "CONNECT"
     }
     
-    public static let UnexpectedError: NSError? = NSError(domain: BluebonnetErrorDomain, code: -1, userInfo: nil)
+    public class var UnexpectedError: NSError? {
+        get {
+            return NSError(domain: BluebonnetErrorDomain, code: -1, userInfo: nil)
+        }
+    }
     
     // you can customise in subclass
     public class func typedSerializer<T: BluebonnetRequest>(api: T) -> Serializer {
@@ -91,6 +95,7 @@ public class Bluebonnet {
     
     public class func requestTask<T: BluebonnetRequest>(api: T) -> Task<Progress, T.Response, Error> {
         let responseSerializer: Serializer = self.typedSerializer(api)
+        let unexpectedError = self.UnexpectedError
         let task = Task<Progress, T.Response, Error> { (progress, fulfill, reject, configure) in
             let req = Alamofire.request(api)
                 .progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
@@ -111,7 +116,7 @@ public class Bluebonnet {
                             fulfill(object)
                             return
                         }
-                        reject(self.UnexpectedError ?? NSError())
+                        reject(unexpectedError ?? NSError())
                 })
             configure.pause = { req.suspend() }
             configure.resume = { req.resume() }
