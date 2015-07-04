@@ -50,10 +50,12 @@ code_sign() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Alamofire.framework'
   install_framework 'Bluebonnet.framework'
+  install_framework 'OHHTTPStubs.framework'
   install_framework 'SwiftTask.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Alamofire.framework'
   install_framework 'Bluebonnet.framework'
+  install_framework 'OHHTTPStubs.framework'
   install_framework 'SwiftTask.framework'
 fi

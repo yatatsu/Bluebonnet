@@ -8,6 +8,6 @@ end
 
 target 'Bluebonnet_Tests', :exclusive => true do
   pod "Bluebonnet", :path => "../"
-
+  pod "OHHTTPStubs"
   
 end

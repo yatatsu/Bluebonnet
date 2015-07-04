@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		3EDCCC2AE26316C1418890F5 /* Pods_Bluebonnet_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34078FF2FD343246D6FC0263 /* Pods_Bluebonnet_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		448812D21B459526003333F4 /* BluebonnetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448812D01B45913D003333F4 /* BluebonnetTests.swift */; };
+		448812D51B459DE0003333F4 /* TestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448812D31B459DBD003333F4 /* TestAPI.swift */; };
 		45FB49BD94AB672A3AE3A5AA /* Pods_Bluebonnet_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A3B619CFBF7AD6D0878B363 /* Pods_Bluebonnet_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		A2A1DC311B452F7900A8E0E3 /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A1DC301B452F7900A8E0E3 /* GitHubAPI.swift */; };
 		A2A1DC331B45311A00A8E0E3 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A1DC321B45311A00A8E0E3 /* Model.swift */; };
 /* End PBXBuildFile section */
@@ -35,6 +36,8 @@
 		2A3B619CFBF7AD6D0878B363 /* Pods_Bluebonnet_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bluebonnet_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34078FF2FD343246D6FC0263 /* Pods_Bluebonnet_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bluebonnet_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CEA39151B233DEFA6683271 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		448812D01B45913D003333F4 /* BluebonnetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluebonnetTests.swift; sourceTree = "<group>"; };
+		448812D31B459DBD003333F4 /* TestAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAPI.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* Bluebonnet_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bluebonnet_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -44,7 +47,6 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* Bluebonnet_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Bluebonnet_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		A2A1DC301B452F7900A8E0E3 /* GitHubAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubAPI.swift; sourceTree = "<group>"; };
 		A2A1DC321B45311A00A8E0E3 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		BFCBE75F34A32A9ED64AA611 /* Pods-Bluebonnet_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bluebonnet_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bluebonnet_Tests/Pods-Bluebonnet_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -121,7 +123,8 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				448812D01B45913D003333F4 /* BluebonnetTests.swift */,
+				448812D31B459DBD003333F4 /* TestAPI.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			name = Tests;
@@ -376,7 +379,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				448812D51B459DE0003333F4 /* TestAPI.swift in Sources */,
+				448812D21B459526003333F4 /* BluebonnetTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

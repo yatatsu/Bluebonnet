@@ -3,20 +3,23 @@ PODS:
   - Bluebonnet (0.1.0):
     - Alamofire (~> 1.2.0)
     - SwiftTask (~> 3.3.0)
+  - OHHTTPStubs (4.0.2)
   - SwiftTask (3.3.0)
   - SwiftyJSON (2.2.0)
 
 DEPENDENCIES:
   - Bluebonnet (from `../`)
+  - OHHTTPStubs
   - SwiftyJSON (= 2.2.0)
 
 EXTERNAL SOURCES:
   Bluebonnet:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
   Alamofire: 5550bf0b575ed1a4bf9be572f9463e1015cc169e
   Bluebonnet: ec1505c64bb35e024f6d26d4ebc489b6bc1cbb4d
+  OHHTTPStubs: dbd1957d414659783e07b49c961940b7564c23d9
   SwiftTask: 8bc1ec4e0348ce8a40436af737992174485f8996
   SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
 
