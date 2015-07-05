@@ -9,11 +9,11 @@
 import Foundation
 import Bluebonnet
 
-class GitHubAPI: Bluebonnet {
-    static let baseURL: NSURL = NSURL(string: "https://api.github.com")!
+class TestAPI: Bluebonnet {
+    static let baseURL: NSURL = NSURL(string: "https://api.mock.com")!
 
     override class var unexpectedError: NSError? {
-        return NSError(domain: "com.github.error", code: 0, userInfo: nil);
+        return NSError(domain: "com.mockapi.error", code: 0, userInfo: nil);
     }
     
     struct GetMock: BluebonnetRequest  {
@@ -75,7 +75,7 @@ class MockError: ErrorDataConvertable {
     
     var customError: NSError? {
         let userInfo = message.map { ["message":$0] }
-        return NSError(domain: "com.github.api", code: 1000, userInfo: userInfo)
+        return NSError(domain: "com.mockapi.api", code: 1000, userInfo: userInfo)
     }
     
     static func convert(response: NSHTTPURLResponse, data: AnyObject) -> MockError? {

@@ -30,7 +30,7 @@ class BluebonnetTests: XCTestCase {
         })
         
         let expectation = expectationWithDescription("ready")
-        let task = GitHubAPI.requestTask(GitHubAPI.GetMock())
+        let task = TestAPI.requestTask(TestAPI.GetMock())
         task.success { response in
             XCTAssert("Bluebonnet" == response.name)
             expectation.fulfill()
@@ -52,7 +52,7 @@ class BluebonnetTests: XCTestCase {
         })
         
         let expectation = expectationWithDescription("ready")
-        let task = GitHubAPI.requestTask(GitHubAPI.GetMock())
+        let task = TestAPI.requestTask(TestAPI.GetMock())
         task.success { _ in
             XCTFail()
             expectation.fulfill()
@@ -75,13 +75,13 @@ class BluebonnetTests: XCTestCase {
         })
         
         let expectation = expectationWithDescription("ready")
-        let task = GitHubAPI.requestTask(GitHubAPI.GetMock())
+        let task = TestAPI.requestTask(TestAPI.GetMock())
         task.success { _ in
             XCTFail()
             expectation.fulfill()
         }
         .failure { (error, isCancelled) -> Void in
-            XCTAssert(error?.domain == "com.github.api")
+            XCTAssert(error?.domain == "com.mockapi.api")
             XCTAssert(error?.userInfo?["message"] as? String == "Not Found")
             expectation.fulfill()
         }
@@ -98,7 +98,7 @@ class BluebonnetTests: XCTestCase {
         })
         
         let expectation = expectationWithDescription("ready")
-        let task = GitHubAPI.requestTask(GitHubAPI.GetMock())
+        let task = TestAPI.requestTask(TestAPI.GetMock())
         task.success { _ in
             XCTFail()
             expectation.fulfill()
@@ -122,13 +122,13 @@ class BluebonnetTests: XCTestCase {
         })
         
         let expectation = expectationWithDescription("ready")
-        let task = GitHubAPI.requestTask(GitHubAPI.GetMock())
+        let task = TestAPI.requestTask(TestAPI.GetMock())
         task.success { _ in
             XCTFail()
             expectation.fulfill()
             }
         .failure { (error, isCancelled) -> Void in
-            XCTAssert(error?.domain == GitHubAPI.unexpectedError?.domain)
+            XCTAssert(error?.domain == TestAPI.unexpectedError?.domain)
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(1.0, handler: nil)
@@ -145,7 +145,7 @@ class BluebonnetTests: XCTestCase {
         })
         
         let expectation = expectationWithDescription("ready")
-        let task = GitHubAPI.requestTask(GitHubAPI.GetMock())
+        let task = TestAPI.requestTask(TestAPI.GetMock())
         task.cancel()
         task.success { response in
             XCTFail()
@@ -177,7 +177,7 @@ class BluebonnetTests: XCTestCase {
         })
         
         let expectation = expectationWithDescription("ready")
-        let task = GitHubAPI.requestTask(GitHubAPI.GetParam(name: "Bluebonnet"))
+        let task = TestAPI.requestTask(TestAPI.GetParam(name: "Bluebonnet"))
         task.success { response in
             XCTAssert("name=Bluebonnet" == response.name)
             expectation.fulfill()

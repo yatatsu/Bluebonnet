@@ -65,7 +65,7 @@ public class Bluebonnet {
     
     public class var unexpectedError: NSError? {
         get {
-            return NSError(domain: BluebonnetErrorDomain, code: -1, userInfo: nil)
+            return NSError(domain: BluebonnetErrorDomain, code: 0, userInfo: nil)
         }
     }
     
