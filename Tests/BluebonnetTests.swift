@@ -188,5 +188,51 @@ class BluebonnetTests: XCTestCase {
         }
         waitForExpectationsWithTimeout(1.0, handler: nil)
     }
+    
+    func testFailureValidation() {
+        let data = NSJSONSerialization
+            .dataWithJSONObject(["name":"Bluebonnet"], options: .PrettyPrinted, error: nil)!
+        
+        OHHTTPStubs.stubRequestsPassingTest({ _ in
+            return true
+        }, withStubResponse: { _ in
+            return OHHTTPStubsResponse(data: data, statusCode: 200, headers: nil)
+        })
+        
+        let expectation = expectationWithDescription("ready")
+        let task = TestAPI.requestTask(TestAPI.GetMockValidation())
+        task.success { response in
+            XCTFail()
+            expectation.fulfill()
+        }
+        .failure { (error, isCancelled) -> Void in
+            XCTAssert(error?.code == -1)
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(1.0, handler: nil)
+    }
+    
+    func testSuccessValidation() {
+        let data = NSJSONSerialization
+            .dataWithJSONObject(["name":"Bluebonnet"], options: .PrettyPrinted, error: nil)!
+        
+        OHHTTPStubs.stubRequestsPassingTest({ _ in
+            return true
+        }, withStubResponse: { _ in
+            return OHHTTPStubsResponse(data: data, statusCode: 200, headers: ["validation":"ok"])
+        })
+        
+        let expectation = expectationWithDescription("ready")
+        let task = TestAPI.requestTask(TestAPI.GetMockValidation())
+        task.success { response in
+            XCTAssert("ok" == response.validated as? String)
+            expectation.fulfill()
+        }
+        .failure { (error, isCancelled) -> Void in
+            XCTFail()
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(1.0, handler: nil)
+    }
 
 }

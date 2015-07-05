@@ -16,6 +16,29 @@ class TestAPI: Bluebonnet {
         return NSError(domain: "com.mockapi.error", code: 0, userInfo: nil);
     }
     
+    override class func requestValidation<T: BluebonnetRequest>(api: T) -> Validation? {
+        switch api {
+        case _ as GetMockValidation:
+            return { (request: NSURLRequest, response: NSHTTPURLResponse) -> Bool in
+                return response.allHeaderFields["validation"] != nil
+            }
+        default:
+            return nil
+        }
+    }
+    
+    struct GetMockValidation: BluebonnetRequest {
+        typealias Response = ValidatedResponse
+        typealias ErrorResponse = MockError
+        let method: HTTPMethod = .GET
+        let parameters: [String:AnyObject] = [:]
+        let path: String = "/validate"
+        
+        var URLRequest: NSURLRequest {
+            return Bluebonnet.build(baseURL, path: path, method: method, parameters: parameters)
+        }
+    }
+    
     struct GetMock: BluebonnetRequest  {
         typealias Response = MockResponse
         typealias ErrorResponse = MockError
@@ -80,5 +103,22 @@ class MockError: ErrorDataConvertable {
     
     static func convert(response: NSHTTPURLResponse, data: AnyObject) -> MockError? {
         return MockError(data: data, response: response)
+    }
+}
+
+class ValidatedResponse: DataConvertable {
+    let validated: AnyObject?
+    let name: String?
+    
+    init?(response: NSHTTPURLResponse, data: AnyObject) {
+        self.validated = response.allHeaderFields["validation"]
+        self.name = data["name"] as? String
+        if self.name == nil {
+            return nil
+        }
+    }
+    
+    static func convert(response: NSHTTPURLResponse, data: AnyObject) -> ValidatedResponse? {
+        return ValidatedResponse(response: response, data: data)
     }
 }

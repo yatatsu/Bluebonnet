@@ -16,6 +16,8 @@ import SwiftTask
 public typealias Progress = (bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64)
 /// Alamofire.Request.Serializer
 public typealias Serializer = (NSURLRequest, NSHTTPURLResponse?, NSData?) -> (AnyObject?, NSError?)
+/// Alamofire.Request.Validation
+public typealias Validation = (NSURLRequest, NSHTTPURLResponse) -> Bool
 public typealias Error = NSError
 
 /// domain for Bluebonnet errors
@@ -70,6 +72,11 @@ public class Bluebonnet {
     }
     
     // you can customise in subclass
+    public class func requestValidation<T: BluebonnetRequest>(api: T) -> Validation? {
+        return nil
+    }
+    
+    // you can customise in subclass
     public class func typedSerializer<T: BluebonnetRequest>(api: T) -> Serializer {
         return  { (request, response, data) in
             let JSONSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
@@ -96,31 +103,36 @@ public class Bluebonnet {
     public class func requestTask<T: BluebonnetRequest>(api: T) -> Task<Progress, T.Response, Error> {
         let responseSerializer: Serializer = self.typedSerializer(api)
         let unexpectedError: NSError? = self.unexpectedError
+        let customValidation = self.requestValidation(api)
         let task = Task<Progress, T.Response, Error> { (progress, fulfill, reject, configure) in
-            let req = Alamofire.request(api)
+            let request = Alamofire.request(api)
                 .progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
                     progress((bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) as Progress)
                 }
-                .validate()
-                .response(responseSerializer,
-                    completionHandler: { (request, response, object: T.Response?, errorObject: T.ErrorResponse?, error) in
-                        if let error = error {
-                            if let objectedError = errorObject?.customError {
-                                reject(objectedError)
-                                return
-                            }
-                            reject(error)
+            if let validation = customValidation {
+                request.validate(validation)
+            } else {
+                request.validate()
+            }
+            request.response(responseSerializer,
+                completionHandler: { (request, response, object: T.Response?, errorObject: T.ErrorResponse?, error) in
+                    if let error = error {
+                        if let objectedError = errorObject?.customError {
+                            reject(objectedError)
                             return
                         }
-                        if let object = object {
-                            fulfill(object)
-                            return
-                        }
-                        reject(unexpectedError ?? NSError())
-                })
-            configure.pause = { req.suspend() }
-            configure.resume = { req.resume() }
-            configure.cancel = { req.cancel() }
+                        reject(error)
+                        return
+                    }
+                    if let object = object {
+                        fulfill(object)
+                        return
+                    }
+                    reject(unexpectedError ?? NSError())
+            })
+            configure.pause = { request.suspend() }
+            configure.resume = { request.resume() }
+            configure.cancel = { request.cancel() }
         }
         return task
     }
