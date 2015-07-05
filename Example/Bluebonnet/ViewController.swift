@@ -37,8 +37,8 @@ class ViewController: UIViewController {
                 print(user.name)
                 return
             }
-            .failure { [weak self] (error, isCancelled) -> Void in
-                print(error?.description)
+            .failure { (errorResult, isCancelled) -> Void in
+                print(errorResult?.error.description)
                 return
         }
         print("start\n")
@@ -54,8 +54,8 @@ class ViewController: UIViewController {
                 }
                 return
             }
-            .failure { (error, isCancelled) -> Void in
-                print(error?.description)
+            .failure { (errorResult, isCancelled) -> Void in
+                print(errorResult?.error.description)
                 return
         }
     }

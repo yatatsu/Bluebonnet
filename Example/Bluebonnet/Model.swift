@@ -77,18 +77,13 @@ class User: DataConvertable {
     }
 }
 
-class GitHubError: ErrorDataConvertable {
+class GitHubError: DataConvertable {
     let documentationUrl: String?
     let message: String?
     
     init(JSON: AnyObject) {
         documentationUrl = JSON["documentation_url"] as? String
         message = JSON["message"] as? String
-    }
-    
-    var customError: NSError? {
-        let userInfo = message.map { ["message":$0] }
-        return NSError(domain: "com.github.api", code: 1000, userInfo: userInfo)
     }
     
     static func convert(response: NSHTTPURLResponse, data: AnyObject) -> GitHubError? {

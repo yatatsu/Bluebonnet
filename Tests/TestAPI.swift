@@ -87,18 +87,13 @@ class MockResponse: DataConvertable {
     }
 }
 
-class MockError: ErrorDataConvertable {
+class MockError: DataConvertable {
     let message: String?
     let response: NSHTTPURLResponse
     
     init(data: AnyObject, response: NSHTTPURLResponse) {
         self.message = data["message"] as? String
         self.response = response
-    }
-    
-    var customError: NSError? {
-        let userInfo = message.map { ["message":$0] }
-        return NSError(domain: "com.mockapi.api", code: 1000, userInfo: userInfo)
     }
     
     static func convert(response: NSHTTPURLResponse, data: AnyObject) -> MockError? {

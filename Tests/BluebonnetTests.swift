@@ -57,8 +57,8 @@ class BluebonnetTests: XCTestCase {
             XCTFail()
             expectation.fulfill()
         }
-        .failure { (error, isCancelled) -> Void in
-            XCTAssert(error?.domain == NSURLErrorDomain)
+        .failure { (errorResult, isCancelled) -> Void in
+            XCTAssert(errorResult?.error.domain == NSURLErrorDomain)
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(1.0, handler: nil)
@@ -80,9 +80,8 @@ class BluebonnetTests: XCTestCase {
             XCTFail()
             expectation.fulfill()
         }
-        .failure { (error, isCancelled) -> Void in
-            XCTAssert(error?.domain == "com.mockapi.api")
-            XCTAssert(error?.userInfo?["message"] as? String == "Not Found")
+        .failure { (errorResult, isCancelled) -> Void in
+            XCTAssert(errorResult?.response?.message == "Not Found")
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(1.0, handler: nil)
@@ -103,9 +102,9 @@ class BluebonnetTests: XCTestCase {
             XCTFail()
             expectation.fulfill()
         }
-        .failure { (error, isCancelled) -> Void in
-            XCTAssert(error?.domain == NSCocoaErrorDomain)
-            XCTAssert(error?.code == 3840)
+        .failure { (errorResult, isCancelled) -> Void in
+            XCTAssert(errorResult?.error.domain == NSCocoaErrorDomain)
+            XCTAssert(errorResult?.error.code == 3840)
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(1.0, handler: nil)
@@ -127,8 +126,8 @@ class BluebonnetTests: XCTestCase {
             XCTFail()
             expectation.fulfill()
             }
-        .failure { (error, isCancelled) -> Void in
-            XCTAssert(error?.domain == TestAPI.unexpectedError?.domain)
+        .failure { (errorResult, isCancelled) -> Void in
+            XCTAssert(errorResult?.error.domain == TestAPI.unexpectedError?.domain)
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(1.0, handler: nil)
@@ -205,8 +204,8 @@ class BluebonnetTests: XCTestCase {
             XCTFail()
             expectation.fulfill()
         }
-        .failure { (error, isCancelled) -> Void in
-            XCTAssert(error?.code == -1)
+        .failure { (errorResult, isCancelled) -> Void in
+            XCTAssert(errorResult?.error.code == -1)
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(1.0, handler: nil)

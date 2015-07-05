@@ -18,7 +18,6 @@ public typealias Progress = (bytesWritten: Int64, totalBytesWritten: Int64, tota
 public typealias Serializer = (NSURLRequest, NSHTTPURLResponse?, NSData?) -> (AnyObject?, NSError?)
 /// Alamofire.Request.Validation
 public typealias Validation = (NSURLRequest, NSHTTPURLResponse) -> Bool
-public typealias Error = NSError
 
 /// domain for Bluebonnet errors
 public let BluebonnetErrorDomain = "com.bluebonnet.error"
@@ -27,7 +26,7 @@ public let BluebonnetErrorDomain = "com.bluebonnet.error"
 
 public protocol BluebonnetRequest: URLRequestConvertible {
     typealias Response: DataConvertable
-    typealias ErrorResponse: ErrorDataConvertable
+    typealias ErrorResponse: DataConvertable
     var path: String { get }
     var method: Bluebonnet.HTTPMethod { get }
     var parameters: [String: AnyObject] { get }
@@ -39,13 +38,6 @@ type for response object.
 public protocol DataConvertable {
     typealias ConvertableType = Self
     static func convert(response: NSHTTPURLResponse, data: AnyObject) -> ConvertableType?
-}
-
-/**
-type for error response object.
-*/
-public protocol ErrorDataConvertable: DataConvertable {
-    var customError: NSError? { get }
 }
 
 // MARK: - API Interface
@@ -93,18 +85,21 @@ public class Bluebonnet {
         }
     }
     
-    public class func build(baseURL: NSURL, path: String, method: HTTPMethod, parameters: [String:AnyObject]?) -> NSURLRequest {
+    public class func build(baseURL: NSURL, path: String, method: HTTPMethod, parameters: [String:AnyObject]?)
+        -> NSURLRequest {
         var req: NSMutableURLRequest = NSMutableURLRequest(URL: baseURL.URLByAppendingPathComponent(path))
         req.HTTPMethod = method.rawValue
         let encoding = Alamofire.ParameterEncoding.URL
         return encoding.encode(req, parameters: parameters).0
     }
     
-    public class func requestTask<T: BluebonnetRequest>(api: T) -> Task<Progress, T.Response, Error> {
+    public class func requestTask<T: BluebonnetRequest>(api: T)
+        -> Task<Progress, T.Response, (error: NSError, response: T.ErrorResponse?)> {
         let responseSerializer: Serializer = self.typedSerializer(api)
         let unexpectedError: NSError? = self.unexpectedError
         let customValidation = self.requestValidation(api)
-        let task = Task<Progress, T.Response, Error> { (progress, fulfill, reject, configure) in
+        let task = Task<Progress, T.Response, (error: NSError, response: T.ErrorResponse?)> {
+            (progress, fulfill, reject, configure) in
             let request = Alamofire.request(api)
                 .progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
                     progress((bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) as Progress)
@@ -115,20 +110,17 @@ public class Bluebonnet {
                 request.validate()
             }
             request.response(responseSerializer,
-                completionHandler: { (request, response, object: T.Response?, errorObject: T.ErrorResponse?, error) in
+                completionHandler: {
+                    (request, response, object: T.Response?, errorObject: T.ErrorResponse?, error) in
                     if let error = error {
-                        if let objectedError = errorObject?.customError {
-                            reject(objectedError)
-                            return
-                        }
-                        reject(error)
+                        reject(error: error, response: errorObject)
                         return
                     }
                     if let object = object {
                         fulfill(object)
                         return
                     }
-                    reject(unexpectedError ?? NSError())
+                    reject(error: unexpectedError ?? NSError(), response: errorObject)
             })
             configure.pause = { request.suspend() }
             configure.resume = { request.resume() }
