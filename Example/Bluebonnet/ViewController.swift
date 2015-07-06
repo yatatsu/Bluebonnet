@@ -32,7 +32,7 @@ class ViewController: UIViewController {
                 print(newProgress.totalBytesWritten)
                 return
             }
-            .success { (user: User) -> Void in
+            .success { user in
                 print("\n")
                 print(user.name)
                 return
@@ -47,8 +47,8 @@ class ViewController: UIViewController {
     func loadRepos(userName: String) {
         let task = GitHubAPI.requestTask(GitHubAPI.GetUserRepos(userName: userName, sort: .Pushed))
         task
-            .success { (repos: Repos) -> Void in
-                repos.repos.map { (repo: Repo) -> Void in
+            .success { repos in
+                repos.repos.map { repo -> Void in
                     print("\n")
                     print("\(repo.name)\n\(repo.description)")
                 }

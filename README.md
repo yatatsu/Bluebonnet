@@ -23,7 +23,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 - Then, create a struct implemented ``BluebonnetRequest``.
 - Define request in the struct. (e.g. ``method``, ``parameters``)
 
-```
+```swift
 public class GitHubAPI: Bluebonnet {
 
     // baseURL for all api
@@ -67,7 +67,7 @@ task
         print(newProgress.totalBytesWritten)
         return
     }
-    .success { (user: User) -> Void in
+    .success { user in // type inference
         print(user.name)
         return
     }
