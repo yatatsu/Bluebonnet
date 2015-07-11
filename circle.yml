@@ -1,18 +1,9 @@
 machine:
-  ruby:
-    version: 2.0.0-p247
   xcode:
-    version: 6.3.1
+    version: "6.3.1"
   environment:
     LC_CTYPE: en_US.UTF-8
-
-dependencies:
-  override:
-    - sudo gem install cocoapods --no-ri --no-rdoc
-  post:
-    - make setup
 
 test:
   override:
     - pod spec lint
-    - make ci
