@@ -15,14 +15,14 @@
 // Bluebonnet
 #define COCOAPODS_POD_AVAILABLE_Bluebonnet
 #define COCOAPODS_VERSION_MAJOR_Bluebonnet 0
-#define COCOAPODS_VERSION_MINOR_Bluebonnet 1
-#define COCOAPODS_VERSION_PATCH_Bluebonnet 0
+#define COCOAPODS_VERSION_MINOR_Bluebonnet 3
+#define COCOAPODS_VERSION_PATCH_Bluebonnet 1
 
 // SwiftTask
 #define COCOAPODS_POD_AVAILABLE_SwiftTask
 #define COCOAPODS_VERSION_MAJOR_SwiftTask 3
 #define COCOAPODS_VERSION_MINOR_SwiftTask 3
-#define COCOAPODS_VERSION_PATCH_SwiftTask 0
+#define COCOAPODS_VERSION_PATCH_SwiftTask 1
 
 // SwiftyJSON
 #define COCOAPODS_POD_AVAILABLE_SwiftyJSON
