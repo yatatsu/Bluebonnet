@@ -4,6 +4,7 @@
 [![Version](https://img.shields.io/cocoapods/v/Bluebonnet.svg?style=flat)](http://cocoapods.org/pods/Bluebonnet)
 [![License](https://img.shields.io/cocoapods/l/Bluebonnet.svg?style=flat)](http://cocoapods.org/pods/Bluebonnet)
 [![Platform](https://img.shields.io/cocoapods/p/Bluebonnet.svg?style=flat)](http://cocoapods.org/pods/Bluebonnet)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Bluebonnet is a simple APIClient using [Alamofire](https://github.com/Alamofire/Alamofire) and [ReactKit/SwiftTask](https://github.com/ReactKit/SwiftTask).
 
