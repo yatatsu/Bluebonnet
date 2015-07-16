@@ -1,6 +1,6 @@
 {
   "name": "Bluebonnet",
-  "version": "0.3.1",
+  "version": "0.3.4",
   "summary": "A simple and type safe API client using Alamofire + SwiftTask.",
   "description": "Bluebonnet is a wrapper of Alamofire and SwiftTask for web API client.\nIt provides simple interface based on SwiftTask  with typed value response.\n",
   "homepage": "https://github.com/yatatsu/Bluebonnet",
@@ -17,7 +17,7 @@
   },
   "source": {
     "git": "https://github.com/yatatsu/Bluebonnet.git",
-    "tag": "0.3.1"
+    "tag": "0.3.4"
   },
   "source_files": "Bluebonnet/*.swift",
   "requires_arc": true,

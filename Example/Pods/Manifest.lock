@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (1.2.3)
-  - Bluebonnet (0.3.1):
+  - Bluebonnet (0.3.4):
     - Alamofire (~> 1.2.0)
     - SwiftTask (~> 3.3.0)
   - OHHTTPStubs (4.0.2)
@@ -18,7 +18,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: 5550bf0b575ed1a4bf9be572f9463e1015cc169e
-  Bluebonnet: aa42383e830f55f5b4f99795c2658241d625df61
+  Bluebonnet: 8e126f22e723178efb17eca6e3d2d0df84bb3dc0
   OHHTTPStubs: dbd1957d414659783e07b49c961940b7564c23d9
   SwiftTask: 0baec4571e2ea235e73817c399cde12056c81f6f
   SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
