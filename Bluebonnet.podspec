@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "Bluebonnet"
-s.version      = "0.3.1"
+s.version      = "0.3.3"
 s.summary      = "A simple and type safe API client using Alamofire + SwiftTask."
 
 s.description  = <<-DESC
