@@ -1,6 +1,0 @@
-framework module SwiftTask {
-  umbrella header "Pods-Bluebonnet_Tests-SwiftTask-umbrella.h"
-
-  export *
-  module * { export * }
-}

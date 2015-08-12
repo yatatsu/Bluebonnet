@@ -15,7 +15,11 @@ import SwiftTask
 /// SwiftTask.Progress
 public typealias Progress = (bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64)
 /// Alamofire.Request.Serializer
-public typealias Serializer = (NSURLRequest, NSHTTPURLResponse?, NSData?) -> (AnyObject?, NSError?)
+public protocol ResponseSerializer {
+    typealias SerializedObject
+    var serializeResponse: (NSURLRequest, NSHTTPURLResponse?, NSData?) -> (SerializedObject?, NSError?) { get }
+}
+
 /// Alamofire.Request.Validation
 public typealias Validation = (NSURLRequest, NSHTTPURLResponse) -> Bool
 
@@ -69,10 +73,10 @@ public class Bluebonnet {
     }
     
     // you can customise in subclass
-    public class func typedSerializer<T: BluebonnetRequest>(api: T) -> Serializer {
-        return  { (request, response, data) in
+    public class func typedSerializer<T: BluebonnetRequest>(api: T) -> GenericResponseSerializer<AnyObject> {
+        return GenericResponseSerializer<AnyObject> { (request, response, data) in
             let JSONSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
-            let (JSON: AnyObject?, serializationError) = JSONSerializer(request, response, data)
+            let (JSON: AnyObject?, serializationError) = JSONSerializer.serializeResponse(request, response, data)
             if let response = response, JSON: AnyObject = JSON {
                 if response.statusCode < 400 {
                     return (T.Response.convert(response, data: JSON) as? AnyObject, nil)
@@ -95,7 +99,7 @@ public class Bluebonnet {
     
     public class func requestTask<T: BluebonnetRequest>(api: T)
         -> Task<Progress, T.Response, (error: NSError, response: T.ErrorResponse?)> {
-        let responseSerializer: Serializer = self.typedSerializer(api)
+        let responseSerializer = typedSerializer(api)
         let unexpectedError: NSError? = self.unexpectedError
         let customValidation = self.requestValidation(api)
         let task = Task<Progress, T.Response, (error: NSError, response: T.ErrorResponse?)> {
@@ -109,7 +113,7 @@ public class Bluebonnet {
             } else {
                 request.validate()
             }
-            request.response(responseSerializer,
+            request.response(responseSerializer: responseSerializer,
                 completionHandler: {
                     (request, response, object: T.Response?, errorObject: T.ErrorResponse?, error) in
                     if let error = error {
@@ -133,8 +137,11 @@ public class Bluebonnet {
 // MARK: - Alamofire extension
 
 extension Alamofire.Request {
-    public func response<T: DataConvertable, E: DataConvertable>(serializer: Serializer, completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, E?, NSError?) -> Void) -> Self {
-        return response(serializer: serializer, completionHandler: { (request, response, object, error) in
+    public func response<T: DataConvertable, E: DataConvertable>(
+        responseSerializer serializer: GenericResponseSerializer<AnyObject>,
+        completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, E?, NSError?) -> Void) -> Self {
+        return response(responseSerializer: serializer, completionHandler: {
+            (request, response, object, error) -> Void in
             switch object {
             case _ as T:
                 completionHandler(request, response, object as? T, nil, error)

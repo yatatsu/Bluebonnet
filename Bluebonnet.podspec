@@ -22,7 +22,7 @@ s.source_files = 'Bluebonnet/*.swift'
 
 s.requires_arc = true
 
-s.dependency "Alamofire", "~> 1.2.0"
+s.dependency "Alamofire", "1.3.1"
 s.dependency "SwiftTask", "~> 3.3.0"
 
 end
